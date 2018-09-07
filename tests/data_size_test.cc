@@ -6,7 +6,7 @@
 #include <vector>
 
 #include "catch.hpp"
-#include "../include/cxx/array_view.hpp"
+#include "../include/array_view.hpp"
 
 
 TEST_CASE("data - observes raw array pointer")

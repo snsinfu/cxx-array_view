@@ -10,7 +10,7 @@
 #include <vector>
 
 #include "catch.hpp"
-#include "../include/cxx/array_view.hpp"
+#include "../include/array_view.hpp"
 
 
 TEST_CASE("array_view::value_type - is not qualified")

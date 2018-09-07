@@ -1,6 +1,3 @@
-INCLUDES = \
-  -I ../include/cxx
-
 OPTFLAGS = \
   -O2
 
@@ -42,5 +39,5 @@ $(MAIN): $(OBJECTS)
 .cc.o:
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
-data_size_test.o: ../include/cxx/array_view.hpp
-array_view_test.o: ../include/cxx/array_view.hpp
+data_size_test.o: ../include/array_view.hpp
+array_view_test.o: ../include/array_view.hpp

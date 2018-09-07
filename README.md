@@ -40,10 +40,10 @@ This library has no dependency and single header-only. Just download [array\_vie
 your include directory and `#include` it.
 
 ```console
-curl -LO https://raw.githubusercontent.com/snsinfu/cxx-array_view/master/include/cxx/array_view.hpp
+curl -LO https://raw.githubusercontent.com/snsinfu/cxx-array_view/master/include/array_view.hpp
 ```
 
-[header]: https://raw.githubusercontent.com/snsinfu/cxx-array_view/master/include/cxx/array_view.hpp
+[header]: https://raw.githubusercontent.com/snsinfu/cxx-array_view/master/include/array_view.hpp
 
 ## Reference
 
