@@ -1,6 +1,10 @@
 OPTFLAGS = \
   -O2
 
+DBGFLAGS = \
+  -g       \
+  -fsanitize=address
+
 CXXFLAGS =          \
   -std=c++11        \
   -pedantic         \
@@ -10,6 +14,7 @@ CXXFLAGS =          \
   -Wsign-conversion \
   -Wshadow          \
   $(OPTFLAGS)       \
+  $(DBGFLAGS)       \
   $(INCLUDES)
 
 MAIN = run_test
