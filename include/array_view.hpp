@@ -39,7 +39,8 @@ namespace cxx
 {
     namespace array_view_detail
     {
-        // data returns a pointer to the first element of a contiguous container or an array.
+        // data returns a pointer to the first element of a contiguous container
+        // or an array.
         template<typename Cont>
         constexpr auto data(Cont& cont) noexcept -> decltype(cont.data())
         {
@@ -66,8 +67,9 @@ namespace cxx
         }
     }
 
-    // array_view is an non-owning range view of an array. It is similar to GSL's span but uses
-    // size_t for indexing, for better compatibility with the standard library.
+    // array_view is an non-owning range view of an array. It is similar to
+    // GSL's span but uses size_t for indexing, for better compatibility with
+    // the standard library.
     template<typename T>
     class array_view
     {
@@ -84,16 +86,18 @@ namespace cxx
         // size_type is the type of size and index values.
         using size_type = std::size_t;
 
-        // iterator is the type of iterators. Guaranteed to be a random access iterator. Currently
-        // this is implemented as an alias of T* but this may change in the future.
+        // iterator is the type of iterators. Guaranteed to be a random access
+        // iterator. Currently this is implemented as an alias of T* but this
+        // may change in the future.
         using iterator = T*;
 
-        // reverse_iterator is the type of reverse iterators. Guaranteed to be a random access
-        // iterator.
+        // reverse_iterator is the type of reverse iterators. Guaranteed to be
+        // a random access iterator.
         using reverse_iterator = std::reverse_iterator<iterator>;
 
-        // const_array_view is the type of read-only array_view with the same value_type. This is
-        // the same as array_view<T> if T is already const qualified.
+        // const_array_view is the type of read-only array_view with the same
+        // value_type. This is the same as array_view<T> if T is already const
+        // qualified.
         using const_array_view = array_view<T const>;
 
         // array_view is default constructible.
@@ -105,14 +109,15 @@ namespace cxx
         // array_view is copy constructible.
         array_view(array_view const&) = default;
 
-        // array_view is constructible from a raw memory span [data, data + size). The behavior is
-        // undefined if the memory region is invalid.
+        // array_view is constructible from a raw memory span [data, data + size).
+        // The behavior is undefined if the memory region is invalid.
         constexpr array_view(pointer data, size_type size)
             : data_{data}, size_{size}
         {
         }
 
-        // array_view is implicitly convertible from a contiguous container like std::vector.
+        // array_view is implicitly convertible from a contiguous container like
+        // std::vector.
         template<
             typename Container,
             typename P = decltype(array_view_detail::data(std::declval<Container&>())),
@@ -139,36 +144,36 @@ namespace cxx
             return size_;
         }
 
-        // data r eturns a pointer to the first element. The pointer may or may not be null if the
-        // view is empty.
+        // data r eturns a pointer to the first element. The pointer may or may
+        // not be null if the view is empty.
         constexpr pointer data() const noexcept
         {
             return data_;
         }
 
-        // front returns a reference to the first element. The behavior is undefined if the view is
-        // empty.
+        // front returns a reference to the first element. The behavior is
+        // undefined if the view is empty.
         constexpr reference front() const
         {
             return operator[](0);
         }
 
-        // back returns a reference to the last element. The behavior is undefined if the view is
-        // empty.
+        // back returns a reference to the last element. The behavior is
+        // undefined if the view is empty.
         constexpr reference back() const
         {
             return operator[](size() - 1);
         }
 
-        // Indexing operator returns a reference to the idx-th element. The behavior is undefined
-        // if the index is out of bounds.
+        // Indexing operator returns a reference to the idx-th element. The
+        // behavior is undefined if the index is out of bounds.
         constexpr reference operator[](size_type idx) const
         {
             return data()[idx];
         }
 
-        // at returns a reference to the idx-th element. It throws std::out_of_range if the index is
-        // out of bounds.
+        // at returns a reference to the idx-th element. It throws
+        // std::out_of_range if the index is out of bounds.
         reference at(size_type idx) const
         {
             if (idx >= size()) {
