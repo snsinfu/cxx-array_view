@@ -109,10 +109,10 @@ namespace cxx
         // array_view is copy constructible.
         array_view(array_view const&) = default;
 
-        // array_view is constructible from a raw memory span [data, data + size).
-        // The behavior is undefined if the memory region is invalid.
-        constexpr array_view(pointer data, size_type size)
-            : data_{data}, size_{size}
+        // array_view is constructible from a raw memory span [p, p + n). The
+        // behavior is undefined if the memory region is invalid.
+        constexpr array_view(pointer p, size_type n)
+            : data_{p}, size_{n}
         {
         }
 
@@ -124,6 +124,10 @@ namespace cxx
             typename S = decltype(array_view_detail::size(std::declval<Container&>())),
             typename = typename std::enable_if<
                 std::is_convertible<typename std::remove_pointer<P>::type(*)[], T(*)[]>::value,
+                int
+            >::type,
+            typename = typename std::enable_if<
+                !std::is_same<Container, array_view<value_type>>::value,
                 int
             >::type
         >
