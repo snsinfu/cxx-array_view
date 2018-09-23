@@ -132,6 +132,12 @@ namespace cxx
         {
         }
 
+        // array_view is implicitly convertible to a read-only view.
+        constexpr operator const_array_view() const noexcept
+        {
+            return {data(), size()};
+        }
+
         // empty returns true if the view is empty.
         constexpr bool empty() const noexcept
         {

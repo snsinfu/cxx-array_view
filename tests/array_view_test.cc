@@ -155,6 +155,23 @@ TEST_CASE("array_view - is implicitly convertible to const_array_view")
     CHECK(const_view.size() == view.size());
 }
 
+TEST_CASE("array_view - is implicitly convertible to const_array_view in function return")
+{
+    int array[3];
+
+    auto return_view = [&]() -> cxx::array_view<int> {
+        return array;
+    };
+
+    auto make_const = [&]() -> cxx::array_view<int const> {
+        return return_view();
+    };
+
+    cxx::array_view<int const> const_view = make_const();
+    CHECK(const_view.data() == &array[0]);
+    CHECK(const_view.size() == 3);
+}
+
 TEST_CASE("array_view - prevents illegal array upcasting")
 {
     class expression {};
